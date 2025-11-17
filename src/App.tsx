@@ -3,26 +3,23 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Header } from "@/components/Header";
 import { Sidebar } from "@/components/Sidebar";
-import Dashboard from "./pages/Dashboard";
-import Transactions from "./pages/Transactions";
-import Budgets from "./pages/Budgets";
-import Analytics from "./pages/Analytics";
-import AIInsights from "./pages/AIInsights";
-import Reports from "./pages/Reports";
-import Settings from "./pages/Settings";
+import { MusicPlayer } from "@/components/MusicPlayer";
+import Home from "./pages/Home";
+import Search from "./pages/Search";
+import Library from "./pages/Library";
+import Playlist from "./pages/Playlist";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
-  <div className="min-h-screen w-full">
-    <Header />
-    <div className="flex w-full">
+  <div className="h-screen flex flex-col bg-background">
+    <div className="flex flex-1 overflow-hidden">
       <Sidebar />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 overflow-hidden">{children}</main>
     </div>
+    <MusicPlayer />
   </div>
 );
 
@@ -34,13 +31,10 @@ const App = () => (
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/transactions" element={<Transactions />} />
-            <Route path="/budgets" element={<Budgets />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/ai-insights" element={<AIInsights />} />
-            <Route path="/reports" element={<Reports />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/library" element={<Library />} />
+            <Route path="/playlist/:id" element={<Playlist />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
